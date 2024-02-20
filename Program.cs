@@ -24,12 +24,28 @@ class Program
         switch (opcao)
         {
             case 0: System.Environment.Exit(0); break;
+            case 1: Abrir(); break;
             case 2: Editar(); break;
 
         }
     }
 
-    static void Abrir() { }
+    static void Abrir()
+    {
+        Console.Clear();
+        Console.WriteLine("Qual o caminho do arquivo?");
+        string caminho = Console.ReadLine();
+
+        using (var arquivo = new StreamReader(caminho))
+        {
+            string texto = arquivo.ReadToEnd();
+            Console.WriteLine(texto);
+        }
+
+        Console.WriteLine();
+        Console.ReadLine();
+        Menu();
+    }
 
     static void Editar()
     {
@@ -47,10 +63,26 @@ class Program
         }
         while (Console.ReadKey().Key != ConsoleKey.Escape);
 
-        Console.Write(texto);
-
+        Salvar(texto);
 
     }
 
+    static void Salvar(string texto)
+    {
+        Console.Clear();
+        Console.WriteLine("Qual caminho deseja salvar o arquivo.");
+        var caminho = Console.ReadLine();
+
+        using (var arquivo = new StreamWriter(caminho))
+        {
+            arquivo.Write(texto);
+
+        }
+
+        Console.WriteLine($"Arquivo {caminho} salvo com sucesso no caminho!");
+        Console.ReadLine();
+
+        Menu();
+    }
 
 }
