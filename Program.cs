@@ -40,10 +40,16 @@ class Program
 
         string texto = "";
 
-        while (Console.ReadKey().Key != ConsoleKey.Escape)
+        do
         {
-
+            texto += Console.ReadLine();
+            texto += Environment.NewLine;
         }
+        while (Console.ReadKey().Key != ConsoleKey.Escape);
+
+        Console.Write(texto);
+
+
     }
 
 
